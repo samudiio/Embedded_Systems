@@ -29,7 +29,7 @@ void vfnTsk_2msB(void)
 
 void vfnTsk_10ms(void)
 {
-	static uint8_t u8500ms_Ctr=0;
+	/*static uint8_t u8500ms_Ctr=0;
 	
 	u8500ms_Ctr++;
 	
@@ -37,7 +37,7 @@ void vfnTsk_10ms(void)
 	{
 		u8500ms_Ctr = 0;
 		LED_Toggle( 1 );
-	}   
+	} */
 }
 
 void vfnTsk_50ms(void)
@@ -47,7 +47,7 @@ void vfnTsk_50ms(void)
 
 void vfnTsk_100ms(void)
 {
-  			
+
 	u8100ms_Ctr++;
     u8100ms_Ctr2++;
 
@@ -60,5 +60,8 @@ void vfnTsk_100ms(void)
 	{
 		u8100ms_Ctr2 = 0;
 	}
+
+
+    //Sheduler point
 }
 
