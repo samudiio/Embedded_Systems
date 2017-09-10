@@ -40,7 +40,7 @@
 /*------------------------------------------------------------------------------
  *         Local Variables
  *----------------------------------------------------------------------------*/
-
+//mas commentsents
 #ifdef PINS_LEDS
 static const Pin pinsLeds[] = {PIN_LED_0, PIN_LED_1};
 static const uint32_t numLeds = PIO_LISTSIZE( pinsLeds );
