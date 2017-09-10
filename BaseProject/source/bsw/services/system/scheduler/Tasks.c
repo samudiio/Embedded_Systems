@@ -65,6 +65,14 @@ void vfnTsk_100ms(void)
     //Sheduler point
 }
 
+
+/**
+ *  \brief External Triggered Task.
+ *
+ *  Execution of this task will be deppendent on the previouly activation of it-
+ *  in Timer0 ISR handler, vfnSchedulePoint() will check priority of current active-
+ *  task and decide if run this task or not
+ */
 void vfnTsk_ExtTriggered(void)
 {
 
