@@ -24,8 +24,10 @@ TaskType Tasks[]={
   {      4,        TASK_2MSB,      vfnTsk_2msB   },
   {      3,        TASK_10MS,      vfnTsk_10ms   },
   {      2,        TASK_50MS,      vfnTsk_50ms   },
-  {      1,        TASK_100MS,     vfnTsk_100ms  }
+  {      1,        TASK_100MS,     vfnTsk_100ms  }  
 };
+
+//modificado
 
 /*----------------------------------------------------------------------------
  *        Local functions
