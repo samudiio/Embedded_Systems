@@ -65,3 +65,8 @@ void vfnTsk_100ms(void)
     //Sheduler point
 }
 
+void vfnTsk_ExtTriggered(void)
+{
+
+}
+

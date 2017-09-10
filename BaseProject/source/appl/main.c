@@ -18,13 +18,14 @@ uint8_t timer0_interrupt;
  *----------------------------------------------------------------------------*/
 
 TaskType Tasks[]={
-/*  TaskPriority    TaskId   TaskFunctionPointer   */
-  {      5,        TASK_1MS,       vfnTsk_1ms    },
-  {      4,        TASK_2MSA,      vfnTsk_2msA   },
-  {      4,        TASK_2MSB,      vfnTsk_2msB   },
-  {      3,        TASK_10MS,      vfnTsk_10ms   },
-  {      2,        TASK_50MS,      vfnTsk_50ms   },
-  {      1,        TASK_100MS,     vfnTsk_100ms  }
+/*  TaskPriority    TaskId      TaskFunctionPointer   */
+  {      5,        TASK_1MS,       vfnTsk_1ms           },
+  {      4,        TASK_2MSA,      vfnTsk_2msA          },
+  {      4,        TASK_2MSB,      vfnTsk_2msB          },
+  {      3,        TASK_10MS,      vfnTsk_10ms          },
+  {      2,        TASK_50MS,      vfnTsk_50ms          },
+  {      1,        TASK_100MS,     vfnTsk_100ms         },
+  {      1,        TASK_100MS,     vfnTsk_ExtTriggered  }
 };
 
 /*----------------------------------------------------------------------------

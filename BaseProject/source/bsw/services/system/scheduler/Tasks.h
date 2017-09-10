@@ -24,7 +24,7 @@ extern void vfnTsk_2msB(void);
 extern void vfnTsk_10ms(void);
 extern void vfnTsk_50ms(void);
 extern void vfnTsk_100ms(void);
-
+extern void vfnTsk_ExtTriggered(void);
 
 /*============================================================================*/
 #endif /*__APP_TASKS */
