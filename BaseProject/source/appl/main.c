@@ -53,40 +53,40 @@ static void _ConfigureLeds( void )
 extern int main( void )
 {
 
-	// /* Disable watchdog */
-	// WDT_Disable( WDT ) ;
+	/* Disable watchdog */
+	WDT_Disable( WDT ) ;
 
-	// /* Output example information */
-	// printf( "\n\r-- Getting Started Example Workspace Updated!!! %s --\n\r", SOFTPACK_VERSION ) ;
-	// printf( "-- %s\n\r", BOARD_NAME ) ;
-	// printf( "-- Compiled: %s %s With %s--\n\r", __DATE__, __TIME__ , COMPILER_NAME);
+	/* Output example information */
+	printf( "\n\r-- Getting Started Example Workspace Updated!!! %s --\n\r", SOFTPACK_VERSION ) ;
+	printf( "-- %s\n\r", BOARD_NAME ) ;
+	printf( "-- Compiled: %s %s With %s--\n\r", __DATE__, __TIME__ , COMPILER_NAME);
 
-	// /* Enable I and D cache */
-	// SCB_EnableICache();
-    // SCB_EnableDCache();
+	/* Enable I and D cache */
+	SCB_EnableICache();
+    SCB_EnableDCache();
 
-	// printf( "Configure LED PIOs.\n\r" ) ;
-	// _ConfigureLeds() ;
+	printf( "Configure LED PIOs.\n\r" ) ;
+	_ConfigureLeds() ;
 
-	// printf("Configure TC.\n\r");
-	// _ConfigureTc();
+	printf("Configure TC.\n\r");
+	_ConfigureTc();
   
-  	// /* Initialize Task Scheduler */
-	// vfnScheduler_Init(&Tasks[0]);
-	// /* Start execution of task scheduler */
-	// vfnScheduler_Start();
+  	/* Initialize Task Scheduler */
+	vfnScheduler_Init(&Tasks[0]);
+	/* Start execution of task scheduler */
+	vfnScheduler_Start();
 
-	// /*-- Loop through all the periodic tasks from Task Scheduler --*/
-	// for(;;)
-	// {
-	// 	/* Perform all scheduled tasks */
-	// 	vfnTask_Scheduler();
-	// 	if(timer0_interrupt == 1)
-	// 	{
-	// 	    timer0_interrupt = 0;
-	// 	    printf("Timer0 Interrupt.\n\r");
-	// 	    LED_Toggle( 1 );
-	// 	}
-	// }
+	/*-- Loop through all the periodic tasks from Task Scheduler --*/
+	for(;;)
+	{
+		/* Perform all scheduled tasks */
+		vfnTask_Scheduler();
+		if(timer0_interrupt == 1)
+		{
+		    timer0_interrupt = 0;
+		    printf("Timer0 Interrupt.\n\r");
+		    LED_Toggle( 1 );
+		}
+	}
 
 }
