@@ -1,7 +1,12 @@
-LOADING	D:\02_Work\Iteso\ESE\2017\Otono\SE\Projects\Project1\Base\BaseProject\workspace\Debug\BaseProject.elf
+CONVERTING	D:\Git\Embedeed_Systems\BaseProject\workspace\Debug\BaseProject.elf
+LOADING	D:\Git\Embedeed_Systems\BaseProject\workspace\Debug\BaseProject.elf
 ANALYZING
 ANALYZING
+INITIALIZING	Emulator: EDBG CMSIS-DAP  ... PLEASE WAIT ...
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-LOADING 	40996 bytes
+CPU	CPUID=0x411FC271 (M7 variant 1, revision 1)
+PROGRAMMING 	41908 bytes
+UMI INFO	Loading UMI monitor...
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (3 sectors)
+UMI INFO	Unloading UMI monitor...

@@ -49,14 +49,17 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>77</C>
-       <L>20</L>
-       <P>..\source\appl\main.c</P>
+       <C>30</C>
+       <L>342</L>
+       <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
+       <VL>325</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>21</C>
-       <P>..\source\bsw\services\system\memalloc\MemAlloc.c</P>
+       <C>30</C>
+       <L>82</L>
+       <P>..\source\appl\main.c</P>
+       <VL>69</VL>
       </PI.1>
       <PI.10>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -117,9 +120,8 @@
       </PI.19>
       <PI.2>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>29</C>
-       <L>3</L>
-       <P>..\source\bsw\services\system\memalloc\MemAlloc.h</P>
+       <C>21</C>
+       <P>..\source\bsw\services\system\memalloc\MemAlloc.c</P>
       </PI.2>
       <PI.20>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -182,9 +184,9 @@
       </PI.29>
       <PI.3>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>17</C>
+       <C>29</C>
        <L>3</L>
-       <P>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</P>
+       <P>..\source\bsw\services\system\memalloc\MemAlloc.h</P>
       </PI.3>
       <PI.30>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -249,10 +251,9 @@
       </PI.39>
       <PI.4>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>54</C>
-       <L>54</L>
-       <P>..\source\bsw\services\system\scheduler\Tasks.c</P>
-       <VL>33</VL>
+       <C>17</C>
+       <L>3</L>
+       <P>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</P>
       </PI.4>
       <PI.40>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -318,29 +319,29 @@
       </PI.49>
       <PI.5>
        <Bookmarks_num_>0</Bookmarks_num_>
+       <C>54</C>
+       <L>54</L>
+       <P>..\source\bsw\services\system\scheduler\Tasks.c</P>
+       <VL>33</VL>
+      </PI.5>
+      <PI.6>
+       <Bookmarks_num_>0</Bookmarks_num_>
        <L>135</L>
        <P>..\source\infrastructure\toolset\gcc\sam_flash.ld</P>
        <VL>117</VL>
-      </PI.5>
-      <PI.6>
+      </PI.6>
+      <PI.7>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>128</L>
        <P>..\source\infrastructure\toolset\gcc\sam_sram.ld</P>
        <VL>114</VL>
-      </PI.6>
-      <PI.7>
+      </PI.7>
+      <PI.8>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>18</C>
        <L>43</L>
        <P>..\source\infrastructure\toolset\gcc\samv71q21_flash.ld</P>
        <VL>35</VL>
-      </PI.7>
-      <PI.8>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>26</C>
-       <L>332</L>
-       <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
-       <VL>325</VL>
       </PI.8>
       <PI.9>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -819,16 +820,24 @@
      <Documents.0>
       <ActiveDocument>
        <Maximized>True</Maximized>
-       <RelativeFileName>..\source\appl\main.c</RelativeFileName>
+       <RelativeFileName>..\source\infrastructure\toolset\gcc\startup_sam.c</RelativeFileName>
       </ActiveDocument>
       <Editor.0>
-       <FileBarIndex>0</FileBarIndex>
+       <FileBarIndex>1</FileBarIndex>
        <RectPosBottom>437</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>575</RectPosRight>
        <RectPosTop>0</RectPosTop>
        <RelativeFileName>..\source\appl\main.c</RelativeFileName>
       </Editor.0>
+      <Editor.1>
+       <FileBarIndex>0</FileBarIndex>
+       <RectPosBottom>462</RectPosBottom>
+       <RectPosLeft>32</RectPosLeft>
+       <RectPosRight>836</RectPosRight>
+       <RectPosTop>32</RectPosTop>
+       <RelativeFileName>..\source\infrastructure\toolset\gcc\startup_sam.c</RelativeFileName>
+      </Editor.1>
       <EditorHistoryFile.0>
        <RelativeFileName>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</RelativeFileName>
       </EditorHistoryFile.0>
@@ -843,10 +852,10 @@
       </EditorHistoryFile.3>
      </Documents.0>
      <Progress>
-      <b>780</b>
-      <l>708</l>
-      <r>1376</r>
-      <t>333</t>
+      <b>738</b>
+      <l>626</l>
+      <r>1294</r>
+      <t>291</t>
      </Progress>
      <Watches>
       <ActiveWatchPane>0</ActiveWatchPane>
@@ -1988,6 +1997,12 @@
            <Options>1</Options>
           </__>
          </Items.5>
+         <Items.6>
+          <__>
+           <Name>Dependencies </Name>
+           <Options>1</Options>
+          </__>
+         </Items.6>
         </__>
        </Items.0>
       </ProjectWindow>
