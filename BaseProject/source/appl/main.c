@@ -84,7 +84,7 @@ extern int main( void )
 		if(timer0_interrupt == 1)
 		{
 		    timer0_interrupt = 0;
-		    printf("Timer0 Interrupt.\n\r");
+		    //printf("Timer0 Interrupt.\n\r");
 		    LED_Toggle( 1 );
 		}
 	}
