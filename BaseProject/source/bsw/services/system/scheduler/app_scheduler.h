@@ -29,6 +29,13 @@ typedef struct
   FuncPtr tskFcnPtr;
 }TaskType;
 
+typedef enum
+{
+    SUSPENDED,
+    READY,
+    RUNNING,
+}TaskStateType;
+
 /*-- Defines -----------------------------------------------------------------*/
 
 

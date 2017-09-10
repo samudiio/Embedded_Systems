@@ -24,7 +24,9 @@ typedef struct
   uint8_t runTask;
   uint8_t taskOverload;
   uint8_t tickValue;
+  uint8_t taskPriority;
   TaskIdType taskId;
+  TaskStateType taskState;
   FuncPtr tskFcnPtr;
 }TaskCtrlType;
 
