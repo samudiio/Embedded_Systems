@@ -31,11 +31,6 @@ typedef struct
 }TaskCtrlType;
 
 
-/*------------------------------------------------------------------------------
- *         Exported Variables
- *----------------------------------------------------------------------------*/
-uint8_t ExtTsk_Activated = 0;
-
 /* -- Global Variables --------------------------------------------------------*/
 uint8_t gu8Scheduler_Status;
 uint8_t gu8Scheduler_Counter;
@@ -234,7 +229,6 @@ void vfnActivateTask(TaskIdType TaskId)
     {
         task_ctrl_array[TaskId].taskState = READY;
     }
-    ExtTsk_Activated = 1;
 }
 
 /**
@@ -259,19 +253,18 @@ void vfnSchedulePoint(void)
         }
     }
 
-    /* check if any task is in READY state and has mayor priority than
+    /* check if external task is in READY state and has mayor priority than
      * current execution task, if so update current taskState to SUSPEND
      */
-    for (task_idx = 0;task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
+    if(task_ctrl_array[(uint8_t)TASK_EXTTG].taskState ==  READY)
     {
-        if(task_ctrl_array[task_idx].taskState ==  READY)
+        if(task_ctrl_array[task_idx].taskPriority > active_task_priority)
         {
-            if(task_ctrl_array[task_idx].taskPriority > active_task_priority)
-            {
-                task_ctrl_array[active_task].taskState = SUSPENDED;
-            }
+            task_ctrl_array[active_task].taskState = SUSPENDED;
+            task_ctrl_array[(uint8_t)TASK_EXTTG].runTask=1;
         }
     }
+
 }
 
 
@@ -299,14 +292,10 @@ void vfnTask_Scheduler(void)
 		{
 			task_ctrl_array[task_idx].runTask = 0;
 
-			if(task_ctrl_array[task_idx].taskState == READY)
+			if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
 			{
-			    if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
-			    {
-			        task_ctrl_array[task_idx].taskState = RUNNING;
-				    task_ctrl_array[task_idx].tskFcnPtr();
-				    task_ctrl_array[task_idx].taskState = SUSPENDED;
-			    }
+			    task_ctrl_array[task_idx].taskState = RUNNING;
+			    task_ctrl_array[task_idx].tskFcnPtr();
 			}
 
 			if ( gu8Scheduler_Counter != task_ctrl_array[task_idx].tickValue )

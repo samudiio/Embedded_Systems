@@ -49,15 +49,15 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>295</L>
-       <P>..\source\bsw\services\system\scheduler\app_scheduler.c</P>
-       <VL>280</VL>
-      </PI.0>
-      <PI.1>
-       <Bookmarks_num_>0</Bookmarks_num_>
        <L>334</L>
        <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
        <VL>325</VL>
+      </PI.0>
+      <PI.1>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>290</L>
+       <P>..\source\bsw\services\system\scheduler\app_scheduler.c</P>
+       <VL>280</VL>
       </PI.1>
       <PI.10>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -118,10 +118,9 @@
       </PI.19>
       <PI.2>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>30</C>
-       <L>82</L>
+       <L>76</L>
        <P>..\source\appl\main.c</P>
-       <VL>57</VL>
+       <VL>51</VL>
       </PI.2>
       <PI.20>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -829,7 +828,7 @@
        <RelativeFileName>..\source\appl\main.c</RelativeFileName>
       </Editor.0>
       <Editor.1>
-       <FileBarIndex>0</FileBarIndex>
+       <FileBarIndex>1</FileBarIndex>
        <RectPosBottom>494</RectPosBottom>
        <RectPosLeft>64</RectPosLeft>
        <RectPosRight>868</RectPosRight>
@@ -837,7 +836,7 @@
        <RelativeFileName>..\source\bsw\services\system\scheduler\app_scheduler.c</RelativeFileName>
       </Editor.1>
       <Editor.2>
-       <FileBarIndex>1</FileBarIndex>
+       <FileBarIndex>0</FileBarIndex>
        <RectPosBottom>462</RectPosBottom>
        <RectPosLeft>32</RectPosLeft>
        <RectPosRight>836</RectPosRight>

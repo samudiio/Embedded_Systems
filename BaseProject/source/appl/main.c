@@ -12,7 +12,6 @@
  *         Exported Variables
  *----------------------------------------------------------------------------*/
 uint8_t ExtTsk_Activated;
-uint8_t external_task;
 
 /*----------------------------------------------------------------------------
  *        Local definitions
@@ -25,7 +24,7 @@ TaskType Tasks[]={
   {      4,        TASK_2MSB,   SUSPENDED,    vfnTsk_2msB          },
   {      3,        TASK_10MS,   SUSPENDED,    vfnTsk_10ms          },
   {      2,        TASK_50MS,   SUSPENDED,    vfnTsk_50ms          },
-  {      1,        TASK_100MS,  READY,        vfnTsk_100ms         },
+  {      1,        TASK_100MS,  SUSPENDED,    vfnTsk_100ms         },
   {      6,        TASK_EXTTG,  SUSPENDED,    vfnTsk_ExtTriggered  }
 };
 
@@ -70,12 +69,7 @@ extern int main( void )
 		if(ExtTsk_Activated)
 		{
 		    ExtTsk_Activated = 0;
-		    printf("External Task is READY .\n\r");
-		}
-		if(external_task)
-		{
-		    LED_Toggle( 1 );
-		    printf("External Task Execution!.\n\r");
+		    printf("External Task Execution .\n\r");
 		}
 	}
 

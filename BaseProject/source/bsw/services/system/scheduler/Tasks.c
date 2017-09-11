@@ -11,56 +11,64 @@
 
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
-uint8_t external_task = 0;
+
+/*------------------------------------------------------------------------------
+ *         Exported Variables
+ *----------------------------------------------------------------------------*/
+uint8_t ExtTsk_Activated = 0;
+
 
 void vfnTsk_1ms(void)
 {
-    //vfnSchedulePoint();
+
+    vfnSchedulePoint();
 }
 
 void vfnTsk_2msA(void)
 {
-  // vfnSchedulePoint();
+    vfnSchedulePoint();
 }
 
 void vfnTsk_2msB(void)
 {
-	
+    vfnSchedulePoint();
 }
 
 void vfnTsk_10ms(void)
 {
-	/*static uint8_t u8500ms_Ctr=0;
 	
-	u8500ms_Ctr++;
-	
-	if (25 <= u8500ms_Ctr)
-	{
-		u8500ms_Ctr = 0;
-		LED_Toggle( 1 );
-	} */
+    vfnSchedulePoint();
 }
 
 void vfnTsk_50ms(void)
 {
+    static uint8_t u8500ms_Ctr=0;
 
+    u8500ms_Ctr++;
+
+    if (25 <= u8500ms_Ctr)
+    {
+        u8500ms_Ctr = 0;
+        LED_Toggle( 0 );
+    }
+    vfnSchedulePoint();
 }
 
 void vfnTsk_100ms(void)
 {
-
-	u8100ms_Ctr++;
+    u8100ms_Ctr++;
     u8100ms_Ctr2++;
 
-	if (5 <= u8100ms_Ctr)
-	{
-		u8100ms_Ctr = 0;
-		LED_Toggle( 0 );
-	}
+    if (5 <= u8100ms_Ctr)
+    {
+        u8100ms_Ctr = 0;
+        LED_Toggle( 1 );
+    }
     if (10 <= u8100ms_Ctr2)
-	{
-		u8100ms_Ctr2 = 0;
-	}
+    {
+        u8100ms_Ctr2 = 0;
+    }
+
     vfnSchedulePoint();
 
 }
@@ -75,7 +83,7 @@ void vfnTsk_100ms(void)
  */
 void vfnTsk_ExtTriggered(void)
 {
-    external_task =1;
-
+    ExtTsk_Activated = 1;
+    //LED_Toggle( 1 );
 }
 
