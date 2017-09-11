@@ -18,16 +18,15 @@
 
 /*-- Includes ----------------------------------------------------------------*/
 #include <stdint.h>
+
+/*------------------------------------------------------------------------------
+ *         Exported Variables
+ *----------------------------------------------------------------------------*/
+extern uint8_t ExtTsk_Activated;
+
 /*-- Types Definitions -------------------------------------------------------*/
 typedef void (*FuncPtr)(void);
 typedef uint8_t TaskIdType;
-
-typedef struct  
-{
-  uint8_t taskPriority;
-  TaskIdType taskId;
-  FuncPtr tskFcnPtr;
-}TaskType;
 
 typedef enum
 {
@@ -36,8 +35,15 @@ typedef enum
     RUNNING,
 }TaskStateType;
 
-/*-- Defines -----------------------------------------------------------------*/
+typedef struct  
+{
+  uint8_t taskPriority;
+  TaskIdType taskId;
+  TaskStateType taskState;
+  FuncPtr tskFcnPtr;
+}TaskType;
 
+/*-- Defines -----------------------------------------------------------------*/
 
 /* Global Task Scheduler Status definitions */
 
@@ -47,7 +53,8 @@ typedef enum
 #define  TASK_10MS    0x03u
 #define  TASK_50MS    0x04u
 #define  TASK_100MS   0x05u
-#define  TASK_MAXNUM  0x06u
+#define  TASK_EXTTG   0X06U
+#define  TASK_MAXNUM  0x07u
 
 
 #define TASK_SCHEDULER_INIT             0x00u   
@@ -72,6 +79,16 @@ void vfnScheduler_Start(void);
 
 /** Scheduler stop function */
 void vfnScheduler_Stop(void);
+
+/** Activates event triggered tasks */
+void vfnActivateTask(TaskIdType TaskId);
+
+/**
+ *  Check tasks in active state in order to identify higher priority task
+ *  and execute it (change its state to run)
+ *
+ */
+extern void vfnSchedulePoint(void);
 
 /** Multi-thread round robin task scheduler */
 void vfnTask_Scheduler(void);

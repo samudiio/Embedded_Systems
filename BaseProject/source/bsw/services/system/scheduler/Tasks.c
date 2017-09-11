@@ -5,21 +5,22 @@
  *  Author: Francisco Martinez
  */ 
 
-#include "Tasks.h"
+#include "app_scheduler.h"
 #include "led.h"
+#include "Tasks.h"
 
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
-
+uint8_t external_task = 0;
 
 void vfnTsk_1ms(void)
 {
-  
+    //vfnSchedulePoint();
 }
 
 void vfnTsk_2msA(void)
 {
-	
+  // vfnSchedulePoint();
 }
 
 void vfnTsk_2msB(void)
@@ -60,9 +61,8 @@ void vfnTsk_100ms(void)
 	{
 		u8100ms_Ctr2 = 0;
 	}
+    vfnSchedulePoint();
 
-
-    //Sheduler point
 }
 
 
@@ -75,6 +75,7 @@ void vfnTsk_100ms(void)
  */
 void vfnTsk_ExtTriggered(void)
 {
+    external_task =1;
 
 }
 

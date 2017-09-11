@@ -7,11 +7,9 @@
 #ifndef TIMER0_H        /*prevent duplicated includes*/
 #define TIMER0_H
 
-
-/*------------------------------------------------------------------------------
- *         Exported Variables
+/*-----------------------------------------------------------------------------
+ *         Headers
  *----------------------------------------------------------------------------*/
-extern uint8_t timer0_interrupt;
 
 /*------------------------------------------------------------------------------
  *         Global Functions
@@ -25,7 +23,8 @@ void TC0_Handler(void);
 /**
  *  \brief Configures the Timer Counter 0.
  */
-extern void _ConfigureTc(void);
+void _ConfigureTc(void);
+
 
 
 #endif /* TIMER0_H */

@@ -49,17 +49,15 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>30</C>
-       <L>342</L>
-       <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
-       <VL>325</VL>
+       <L>295</L>
+       <P>..\source\bsw\services\system\scheduler\app_scheduler.c</P>
+       <VL>280</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>30</C>
-       <L>82</L>
-       <P>..\source\appl\main.c</P>
-       <VL>69</VL>
+       <L>334</L>
+       <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
+       <VL>325</VL>
       </PI.1>
       <PI.10>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -120,8 +118,10 @@
       </PI.19>
       <PI.2>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>21</C>
-       <P>..\source\bsw\services\system\memalloc\MemAlloc.c</P>
+       <C>30</C>
+       <L>82</L>
+       <P>..\source\appl\main.c</P>
+       <VL>57</VL>
       </PI.2>
       <PI.20>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -184,9 +184,8 @@
       </PI.29>
       <PI.3>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>29</C>
-       <L>3</L>
-       <P>..\source\bsw\services\system\memalloc\MemAlloc.h</P>
+       <C>21</C>
+       <P>..\source\bsw\services\system\memalloc\MemAlloc.c</P>
       </PI.3>
       <PI.30>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -251,9 +250,9 @@
       </PI.39>
       <PI.4>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>17</C>
+       <C>29</C>
        <L>3</L>
-       <P>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</P>
+       <P>..\source\bsw\services\system\memalloc\MemAlloc.h</P>
       </PI.4>
       <PI.40>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -319,36 +318,35 @@
       </PI.49>
       <PI.5>
        <Bookmarks_num_>0</Bookmarks_num_>
+       <C>17</C>
+       <L>3</L>
+       <P>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</P>
+      </PI.5>
+      <PI.6>
+       <Bookmarks_num_>0</Bookmarks_num_>
        <C>54</C>
        <L>54</L>
        <P>..\source\bsw\services\system\scheduler\Tasks.c</P>
        <VL>33</VL>
-      </PI.5>
-      <PI.6>
+      </PI.6>
+      <PI.7>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>135</L>
        <P>..\source\infrastructure\toolset\gcc\sam_flash.ld</P>
        <VL>117</VL>
-      </PI.6>
-      <PI.7>
+      </PI.7>
+      <PI.8>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>128</L>
        <P>..\source\infrastructure\toolset\gcc\sam_sram.ld</P>
        <VL>114</VL>
-      </PI.7>
-      <PI.8>
+      </PI.8>
+      <PI.9>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>18</C>
        <L>43</L>
        <P>..\source\infrastructure\toolset\gcc\samv71q21_flash.ld</P>
        <VL>35</VL>
-      </PI.8>
-      <PI.9>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>35</C>
-       <L>211</L>
-       <P>..\source\bsw\services\system\scheduler\app_scheduler.c</P>
-       <VL>192</VL>
       </PI.9>
      </REG_ROOT>
     </EditorOptions>
@@ -820,10 +818,10 @@
      <Documents.0>
       <ActiveDocument>
        <Maximized>True</Maximized>
-       <RelativeFileName>..\source\infrastructure\toolset\gcc\startup_sam.c</RelativeFileName>
+       <RelativeFileName>..\source\bsw\services\system\scheduler\app_scheduler.c</RelativeFileName>
       </ActiveDocument>
       <Editor.0>
-       <FileBarIndex>1</FileBarIndex>
+       <FileBarIndex>2</FileBarIndex>
        <RectPosBottom>437</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>575</RectPosRight>
@@ -832,12 +830,20 @@
       </Editor.0>
       <Editor.1>
        <FileBarIndex>0</FileBarIndex>
+       <RectPosBottom>494</RectPosBottom>
+       <RectPosLeft>64</RectPosLeft>
+       <RectPosRight>868</RectPosRight>
+       <RectPosTop>64</RectPosTop>
+       <RelativeFileName>..\source\bsw\services\system\scheduler\app_scheduler.c</RelativeFileName>
+      </Editor.1>
+      <Editor.2>
+       <FileBarIndex>1</FileBarIndex>
        <RectPosBottom>462</RectPosBottom>
        <RectPosLeft>32</RectPosLeft>
        <RectPosRight>836</RectPosRight>
        <RectPosTop>32</RectPosTop>
        <RelativeFileName>..\source\infrastructure\toolset\gcc\startup_sam.c</RelativeFileName>
-      </Editor.1>
+      </Editor.2>
       <EditorHistoryFile.0>
        <RelativeFileName>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</RelativeFileName>
       </EditorHistoryFile.0>
@@ -1926,7 +1932,7 @@
        </Items.0>
       </OSWindow>
       <ProjectWindow>
-       <Selected></Selected>
+       <Selected>main.c</Selected>
        <Items.0>
         <__>
          <Name>Files</Name>
@@ -1943,66 +1949,6 @@
            </Items.0>
           </__>
          </Items.0>
-         <Items.1>
-          <__>
-           <Name>board</Name>
-           <Options>1</Options>
-           <Items.0>
-            <__>
-             <Name>board_lowlevel.c</Name>
-             <Options>4</Options>
-            </__>
-           </Items.0>
-          </__>
-         </Items.1>
-         <Items.2>
-          <__>
-           <Name>ecual</Name>
-           <Options>1</Options>
-           <Items.0>
-            <__>
-             <Name>led.c</Name>
-             <Options>4</Options>
-            </__>
-           </Items.0>
-          </__>
-         </Items.2>
-         <Items.3>
-          <__>
-           <Name>mcal</Name>
-           <Options>1</Options>
-           <Items.0>
-            <__>
-             <Name>exceptions.c</Name>
-             <Options>4</Options>
-            </__>
-           </Items.0>
-          </__>
-         </Items.3>
-         <Items.4>
-          <__>
-           <Name>services</Name>
-           <Options>1</Options>
-           <Items.0>
-            <__>
-             <Name>app_scheduler.c</Name>
-             <Options>4</Options>
-            </__>
-           </Items.0>
-          </__>
-         </Items.4>
-         <Items.5>
-          <__>
-           <Name>toolset</Name>
-           <Options>1</Options>
-          </__>
-         </Items.5>
-         <Items.6>
-          <__>
-           <Name>Dependencies </Name>
-           <Options>1</Options>
-          </__>
-         </Items.6>
         </__>
        </Items.0>
       </ProjectWindow>

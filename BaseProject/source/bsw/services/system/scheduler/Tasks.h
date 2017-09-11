@@ -12,8 +12,10 @@
 /*-- Includes ----------------------------------------------------------------*/
 
 /*-- Variables -------------------------------------------------------*/
+extern uint8_t external_task;
 
 /*-- Defines -----------------------------------------------------------------*/
+
 
 /*-- Macros ------------------------------------------------------------------*/
 
@@ -24,6 +26,12 @@ extern void vfnTsk_2msB(void);
 extern void vfnTsk_10ms(void);
 extern void vfnTsk_50ms(void);
 extern void vfnTsk_100ms(void);
+
+/**
+ *  \brief  External Triggered Task is executed if there is a higher priority
+ *          task than the task currently in execution
+ *
+ */
 extern void vfnTsk_ExtTriggered(void);
 
 /*============================================================================*/

@@ -350,6 +350,13 @@
          <CompilerOptions>-x c  -mcpu=cortex-m7  -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 $(DEFINES) $(INCLUDES)  -g3 -c -I $(IRFDIR) -o $(NOEXT).o $(EDNAME) -fno-builtin-fabs</CompilerOptions>
         </FileOptios>
        </File.4>
+       <File.5>
+        <FileName>$(IRFDIR)..\source\bsw\services\system\timer0\timer0.c</FileName>
+        <FileOptios>
+         <CompilerDefines>__SAMV71Q21__</CompilerDefines>
+         <CompilerOptions>-x c  -mcpu=cortex-m7  -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 $(DEFINES) $(INCLUDES)  -g3 -c -I $(IRFDIR) -o $(NOEXT).o $(EDNAME) -fno-builtin-fabs</CompilerOptions>
+        </FileOptios>
+       </File.5>
       </LinkGroup.2>
       <LinkGroup.3>
        <LinkGroupName>ecual</LinkGroupName>
@@ -360,13 +367,6 @@
          <CompilerOptions>-x c  -mcpu=cortex-m7  -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 $(DEFINES) $(INCLUDES)  -g3 -c -I $(IRFDIR) -o $(NOEXT).o $(EDNAME) -fno-builtin-fabs</CompilerOptions>
         </FileOptios>
        </File.0>
-       <File.1>
-        <FileName>$(IRFDIR)..\source\bsw\ecual\timer0.c</FileName>
-        <FileOptios>
-         <CompilerDefines>__SAMV71Q21__</CompilerDefines>
-         <CompilerOptions>-x c  -mcpu=cortex-m7  -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 $(DEFINES) $(INCLUDES)  -g3 -c -I $(IRFDIR) -o $(NOEXT).o $(EDNAME) -fno-builtin-fabs</CompilerOptions>
-        </FileOptios>
-       </File.1>
       </LinkGroup.3>
       <LinkGroup.4>
        <LinkGroupName>appl</LinkGroupName>

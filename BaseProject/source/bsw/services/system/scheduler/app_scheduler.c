@@ -30,6 +30,12 @@ typedef struct
   FuncPtr tskFcnPtr;
 }TaskCtrlType;
 
+
+/*------------------------------------------------------------------------------
+ *         Exported Variables
+ *----------------------------------------------------------------------------*/
+uint8_t ExtTsk_Activated = 0;
+
 /* -- Global Variables --------------------------------------------------------*/
 uint8_t gu8Scheduler_Status;
 uint8_t gu8Scheduler_Counter;
@@ -62,7 +68,6 @@ TaskCtrlType task_ctrl_array[TASK_MAXNUM];
 
 void vfnScheduler_Callback(void)
 {
-	
 	/*-- Update scheduler control variable --*/
 	gu8Scheduler_Counter++;
 	
@@ -81,6 +86,7 @@ void vfnScheduler_Callback(void)
 		{
 			gu8Scheduler_Thread_ID = TASK_100MS;
 			u8_100ms_Counter = 0;
+			task_ctrl_array[(uint8_t)TASK_100MS].taskState = READY;
 			task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
 			task_ctrl_array[(uint8_t)TASK_100MS].tickValue = gu8Scheduler_Counter;
 		}
@@ -89,6 +95,7 @@ void vfnScheduler_Callback(void)
 		{
 			gu8Scheduler_Thread_ID = TASK_1MS;
 		}
+		task_ctrl_array[(uint8_t)TASK_1MS].taskState = READY;
 		task_ctrl_array[(uint8_t)TASK_1MS].runTask=1;
 		task_ctrl_array[(uint8_t)TASK_1MS].tickValue = gu8Scheduler_Counter;
 	}
@@ -103,12 +110,14 @@ void vfnScheduler_Callback(void)
 		/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 		if ((gu8Scheduler_Counter & 0x02) == 0x02)
 		{
+
 			u8_50ms_Counter++;
 			/*-- Allow 50 ms periodic tasks to be executed --*/
 			if (u8_50ms_Counter >= 25)
 			{
 				gu8Scheduler_Thread_ID = TASK_50MS;
 				u8_50ms_Counter = 0;
+			    task_ctrl_array[(uint8_t)TASK_50MS].taskState = READY;
 				task_ctrl_array[(uint8_t)TASK_50MS].runTask=1;
 				task_ctrl_array[(uint8_t)TASK_50MS].tickValue = gu8Scheduler_Counter;
 			}
@@ -117,7 +126,9 @@ void vfnScheduler_Callback(void)
 			{
 				gu8Scheduler_Thread_ID = TASK_2MSA;
 			}
-			task_ctrl_array[(uint8_t)TASK_2MSA].runTask=1;
+			 task_ctrl_array[(uint8_t)TASK_2MSA].taskState = READY;
+			 task_ctrl_array[(uint8_t)TASK_2MSA].runTask=1;
+
 			task_ctrl_array[(uint8_t)TASK_2MSA].tickValue = gu8Scheduler_Counter;
 		}
 		else
@@ -137,6 +148,7 @@ void vfnScheduler_Callback(void)
 				{
 					gu8Scheduler_Thread_ID = TASK_10MS;
 					u8_10ms_Counter = 0;
+					task_ctrl_array[(uint8_t)TASK_10MS].taskState = READY;
 					task_ctrl_array[(uint8_t)TASK_10MS].runTask=1;
 					task_ctrl_array[(uint8_t)TASK_10MS].tickValue = gu8Scheduler_Counter;
 				}
@@ -145,6 +157,7 @@ void vfnScheduler_Callback(void)
 				{
 					gu8Scheduler_Thread_ID = TASK_2MSB;
 				}
+				task_ctrl_array[(uint8_t)TASK_2MSB].taskState = READY;
 				task_ctrl_array[(uint8_t)TASK_2MSB].runTask=1;
 				task_ctrl_array[(uint8_t)TASK_2MSB].tickValue = gu8Scheduler_Counter;
 			}
@@ -171,6 +184,8 @@ void vfnScheduler_Init(TaskType *TaskArray)
   gu8Scheduler_Status = TASK_SCHEDULER_INIT;
 	for (task_idx = 0; task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
 	{
+	    task_ctrl_array[task_idx].taskState = TaskArray[task_idx].taskState;
+	    task_ctrl_array[task_idx].taskPriority = TaskArray[task_idx].taskPriority;
 		task_ctrl_array[task_idx].tskFcnPtr = TaskArray[task_idx].tskFcnPtr;
 		task_ctrl_array[task_idx].taskId = TaskArray[task_idx].taskId;
 	}
@@ -188,6 +203,9 @@ void vfnScheduler_Init(TaskType *TaskArray)
 */
 void vfnScheduler_Start(void)
 {
+    LED_Configure( 0 ) ;
+    LED_Configure( 1 ) ;
+    _ConfigureTc();
     TimeTick_Configure(vfnScheduler_Callback);
     gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;
 }
@@ -205,6 +223,59 @@ void vfnScheduler_Stop(void)
     /* Update scheduler status accordingly */
     gu8Scheduler_Status = TASK_SCHEDULER_HALTED;
 }
+
+/**
+ *  \brief Activates event triggered tasks according to the TaskId parameterTask
+ *
+ */
+void vfnActivateTask(TaskIdType TaskId)
+{
+    if(TaskId < (uint8_t)TASK_MAXNUM)
+    {
+        task_ctrl_array[TaskId].taskState = READY;
+    }
+    ExtTsk_Activated = 1;
+}
+
+/**
+ *  Check tasks in active state in order to identify higher priority task
+ *  and execute it.
+ *
+ */
+void vfnSchedulePoint(void)
+{
+    TaskIdType task_idx;
+    TaskIdType active_task;
+    uint8_t active_task_priority = 0;
+    uint8_t highest_priotiry = 0;
+
+    /*save current active task Id and priority*/
+    for (task_idx = 0;task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
+    {
+        if(task_ctrl_array[task_idx].taskState == RUNNING)
+        {
+            active_task = task_ctrl_array[task_idx].taskId;
+            active_task_priority = task_ctrl_array[task_idx].taskPriority;
+        }
+    }
+
+    /* check if any task is in READY state and has mayor priority than
+     * current execution task, if so update current taskState to SUSPEND
+     */
+    for (task_idx = 0;task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
+    {
+        if(task_ctrl_array[task_idx].taskState ==  READY)
+        {
+            if(task_ctrl_array[task_idx].taskPriority > active_task_priority)
+            {
+                task_ctrl_array[active_task].taskState = SUSPENDED;
+            }
+        }
+    }
+}
+
+
+
 
 /*******************************************************************************/
 /**
@@ -227,10 +298,17 @@ void vfnTask_Scheduler(void)
 		if( 1 == task_ctrl_array[task_idx].runTask )
 		{
 			task_ctrl_array[task_idx].runTask = 0;
-			if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
+
+			if(task_ctrl_array[task_idx].taskState == READY)
 			{
-				task_ctrl_array[task_idx].tskFcnPtr();
+			    if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
+			    {
+			        task_ctrl_array[task_idx].taskState = RUNNING;
+				    task_ctrl_array[task_idx].tskFcnPtr();
+				    task_ctrl_array[task_idx].taskState = SUSPENDED;
+			    }
 			}
+
 			if ( gu8Scheduler_Counter != task_ctrl_array[task_idx].tickValue )
 			{
 				task_ctrl_array[task_idx].taskOverload = 1;

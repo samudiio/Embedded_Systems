@@ -4,7 +4,6 @@
 
 #include "board.h"
 #include "app_scheduler.h"
-#include "timer0.h"
 #include "Tasks.h"    
 #include <stdbool.h>
 #include <stdio.h>
@@ -12,36 +11,27 @@
 /*------------------------------------------------------------------------------
  *         Exported Variables
  *----------------------------------------------------------------------------*/
-uint8_t timer0_interrupt;
+uint8_t ExtTsk_Activated;
+uint8_t external_task;
+
 /*----------------------------------------------------------------------------
  *        Local definitions
  *----------------------------------------------------------------------------*/
 
 TaskType Tasks[]={
-/*  TaskPriority    TaskId      TaskFunctionPointer   */
-  {      5,        TASK_1MS,       vfnTsk_1ms           },
-  {      4,        TASK_2MSA,      vfnTsk_2msA          },
-  {      4,        TASK_2MSB,      vfnTsk_2msB          },
-  {      3,        TASK_10MS,      vfnTsk_10ms          },
-  {      2,        TASK_50MS,      vfnTsk_50ms          },
-  {      1,        TASK_100MS,     vfnTsk_100ms         },
-  {      1,        TASK_100MS,     vfnTsk_ExtTriggered  }
+/*  TaskPriority    TaskId      TaskState     TaskFunctionPointer */
+  {      5,        TASK_1MS,    SUSPENDED,    vfnTsk_1ms           },
+  {      4,        TASK_2MSA,   SUSPENDED,    vfnTsk_2msA          },
+  {      4,        TASK_2MSB,   SUSPENDED,    vfnTsk_2msB          },
+  {      3,        TASK_10MS,   SUSPENDED,    vfnTsk_10ms          },
+  {      2,        TASK_50MS,   SUSPENDED,    vfnTsk_50ms          },
+  {      1,        TASK_100MS,  READY,        vfnTsk_100ms         },
+  {      6,        TASK_EXTTG,  SUSPENDED,    vfnTsk_ExtTriggered  }
 };
 
 /*----------------------------------------------------------------------------
  *        Local functions
  *----------------------------------------------------------------------------*/
-
-/**
- *  \brief Configure LEDs
- *
- *  Configures LEDs \#1 and \#2 (cleared by default).
- */
-static void _ConfigureLeds( void )
-{
-	LED_Configure( 0 ) ;
-	LED_Configure( 1 ) ;
-}
 
 /*----------------------------------------------------------------------------
  *        Exported functions
@@ -66,14 +56,9 @@ extern int main( void )
 	SCB_EnableICache();
     SCB_EnableDCache();
 
-	printf( "Configure LED PIOs.\n\r" ) ;
-	_ConfigureLeds() ;
+    /* Initialize Task Scheduler */
+     vfnScheduler_Init(&Tasks[0]);
 
-	printf("Configure TC.\n\r");
-	_ConfigureTc();
-  
-  	/* Initialize Task Scheduler */
-	vfnScheduler_Init(&Tasks[0]);
 	/* Start execution of task scheduler */
 	vfnScheduler_Start();
 
@@ -82,11 +67,15 @@ extern int main( void )
 	{
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
-		if(timer0_interrupt == 1)
+		if(ExtTsk_Activated)
 		{
-		    timer0_interrupt = 0;
-		    printf("Timer0 Interrupt.\n\r");
+		    ExtTsk_Activated = 0;
+		    printf("External Task is READY .\n\r");
+		}
+		if(external_task)
+		{
 		    LED_Toggle( 1 );
+		    printf("External Task Execution!.\n\r");
 		}
 	}
 

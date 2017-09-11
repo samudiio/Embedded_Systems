@@ -9,11 +9,11 @@
  *----------------------------------------------------------------------------*/
 #include "board.h"
 #include "timer0.h"
+#include "app_scheduler.h"
 
 /*------------------------------------------------------------------------------
- *         Exported Variables
+ *         Local Variables
  *----------------------------------------------------------------------------*/
-uint8_t timer0_interrupt = 0;
 
 /*------------------------------------------------------------------------------
  *         Global Functions
@@ -30,7 +30,7 @@ void TC0_Handler(void)
     volatile uint32_t dummy;
     /* Clear status bit to acknowledge interrupt */
     dummy = TC0->TC_CHANNEL[ 0 ].TC_SR;
-    timer0_interrupt = 1;
+    vfnActivateTask((TaskIdType)TASK_EXTTG);
     NVIC_DisableIRQ(TC0_IRQn);
 
 }
@@ -40,7 +40,7 @@ void TC0_Handler(void)
  *  TC0 interrupt handler will generates 1s interrupt and activate an external task.
  *  \note IRQ handler must be configured before invoking this function.
  */
-extern void _ConfigureTc(void)
+void _ConfigureTc(void)
 {
     uint32_t div;
     uint32_t tcclks;
