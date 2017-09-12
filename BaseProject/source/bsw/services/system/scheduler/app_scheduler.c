@@ -260,7 +260,7 @@ void vfnSchedulePoint(void)
     {
         if(task_ctrl_array[task_idx].taskPriority > active_task_priority)
         {
-            task_ctrl_array[active_task].taskState = SUSPENDED;
+            task_ctrl_array[active_task].taskState = READY;
             task_ctrl_array[(uint8_t)TASK_EXTTG].runTask=1;
         }
     }
@@ -296,6 +296,10 @@ void vfnTask_Scheduler(void)
 			{
 			    task_ctrl_array[task_idx].taskState = RUNNING;
 			    task_ctrl_array[task_idx].tskFcnPtr();
+			}
+			if(task_ctrl_array[(uint8_t)TASK_EXTTG].taskState == RUNNING)
+			{
+			    task_ctrl_array[(uint8_t)TASK_EXTTG].taskState = SUSPENDED;
 			}
 
 			if ( gu8Scheduler_Counter != task_ctrl_array[task_idx].tickValue )
