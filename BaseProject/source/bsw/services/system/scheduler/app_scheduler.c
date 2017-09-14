@@ -18,16 +18,17 @@
 /** Scheduler function prototypes definitions */
 #include "app_scheduler.h"
 #include "chip.h"
+#include "timer0.h"
 
 typedef struct  
 {
   uint8_t runTask;
   uint8_t taskOverload;
   uint8_t tickValue;
-  uint8_t taskPriority;
   TaskIdType taskId;
-  TaskStateType taskState;
   FuncPtr tskFcnPtr;
+  TaskStateType taskState;
+  uint8_t taskPriority;
 }TaskCtrlType;
 
 /* -- Global Variables --------------------------------------------------------*/
@@ -60,7 +61,15 @@ TaskCtrlType task_ctrl_array[TASK_MAXNUM];
 * \todo
 */
 
-void vfnScheduler_Callback(void)
+//Aqui de debe cambiar 
+//task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
+//POR ==> 
+//task_ctrl_array[task_idx].taskState = TASK_STATE_READY;
+//Posteriormente ir a vfnSchedulerPoint() para que decida quien tiene mas prioridad entre los READY
+//Y ponga 
+//task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
+
+void vfnScheduler_Callback(void)            
 {
 	
 	/*-- Update scheduler control variable --*/
@@ -81,7 +90,8 @@ void vfnScheduler_Callback(void)
 		{
 			gu8Scheduler_Thread_ID = TASK_100MS;
 			u8_100ms_Counter = 0;
-			task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
+			//task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
+      task_ctrl_array[(uint8_t)TASK_100MS].taskState = TASK_STATE_READY;
 			task_ctrl_array[(uint8_t)TASK_100MS].tickValue = gu8Scheduler_Counter;
 		}
 		/*-- Allow 1 ms periodic tasks to be executed --*/
@@ -89,7 +99,8 @@ void vfnScheduler_Callback(void)
 		{
 			gu8Scheduler_Thread_ID = TASK_1MS;
 		}
-		task_ctrl_array[(uint8_t)TASK_1MS].runTask=1;
+		//task_ctrl_array[(uint8_t)TASK_1MS].runTask=1;
+    task_ctrl_array[(uint8_t)TASK_1MS].taskState = TASK_STATE_READY;
 		task_ctrl_array[(uint8_t)TASK_1MS].tickValue = gu8Scheduler_Counter;
 	}
 	else
@@ -109,7 +120,8 @@ void vfnScheduler_Callback(void)
 			{
 				gu8Scheduler_Thread_ID = TASK_50MS;
 				u8_50ms_Counter = 0;
-				task_ctrl_array[(uint8_t)TASK_50MS].runTask=1;
+				//task_ctrl_array[(uint8_t)TASK_50MS].runTask=1;
+        task_ctrl_array[(uint8_t)TASK_50MS].taskState = TASK_STATE_READY;
 				task_ctrl_array[(uint8_t)TASK_50MS].tickValue = gu8Scheduler_Counter;
 			}
 			/*-- Allow 2 ms group A periodic tasks to be executed --*/
@@ -117,7 +129,8 @@ void vfnScheduler_Callback(void)
 			{
 				gu8Scheduler_Thread_ID = TASK_2MSA;
 			}
-			task_ctrl_array[(uint8_t)TASK_2MSA].runTask=1;
+			//task_ctrl_array[(uint8_t)TASK_2MSA].runTask=1;
+      task_ctrl_array[(uint8_t)TASK_2MSA].taskState = TASK_STATE_READY;
 			task_ctrl_array[(uint8_t)TASK_2MSA].tickValue = gu8Scheduler_Counter;
 		}
 		else
@@ -137,7 +150,8 @@ void vfnScheduler_Callback(void)
 				{
 					gu8Scheduler_Thread_ID = TASK_10MS;
 					u8_10ms_Counter = 0;
-					task_ctrl_array[(uint8_t)TASK_10MS].runTask=1;
+					//task_ctrl_array[(uint8_t)TASK_10MS].runTask=1;
+          task_ctrl_array[(uint8_t)TASK_10MS].taskState = TASK_STATE_READY;
 					task_ctrl_array[(uint8_t)TASK_10MS].tickValue = gu8Scheduler_Counter;
 				}
 				/*-- Allow 2 ms group B periodic tasks to be executed --*/
@@ -145,11 +159,14 @@ void vfnScheduler_Callback(void)
 				{
 					gu8Scheduler_Thread_ID = TASK_2MSB;
 				}
-				task_ctrl_array[(uint8_t)TASK_2MSB].runTask=1;
+				//task_ctrl_array[(uint8_t)TASK_2MSB].runTask=1;
+        task_ctrl_array[(uint8_t)TASK_2MSB].taskState = TASK_STATE_READY;
 				task_ctrl_array[(uint8_t)TASK_2MSB].tickValue = gu8Scheduler_Counter;
 			}
 		}
 	}
+  
+  
 }
 
 /*******************************************************************************/
@@ -173,6 +190,8 @@ void vfnScheduler_Init(TaskType *TaskArray)
 	{
 		task_ctrl_array[task_idx].tskFcnPtr = TaskArray[task_idx].tskFcnPtr;
 		task_ctrl_array[task_idx].taskId = TaskArray[task_idx].taskId;
+    task_ctrl_array[task_idx].taskPriority = TaskArray[task_idx].taskPriority;
+    task_ctrl_array[task_idx].taskState = TaskArray[task_idx].taskState;   //Todas se inician como suspendidas
 	}
 }
 
@@ -220,7 +239,9 @@ void vfnScheduler_Stop(void)
 */
 void vfnTask_Scheduler(void)
 {
-	TaskIdType task_idx;
+	
+  vfnSchedulerPoint();
+  TaskIdType task_idx;
 	
 	for (task_idx = 0;task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
 	{
@@ -229,7 +250,9 @@ void vfnTask_Scheduler(void)
 			task_ctrl_array[task_idx].runTask = 0;
 			if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
 			{
-				task_ctrl_array[task_idx].tskFcnPtr();
+				task_ctrl_array[(uint8_t)task_idx].taskState = TASK_STATE_RUNNING;
+        task_ctrl_array[task_idx].tskFcnPtr();
+        task_ctrl_array[(uint8_t)task_idx].taskState = TASK_STATE_SUSPENDED;
 			}
 			if ( gu8Scheduler_Counter != task_ctrl_array[task_idx].tickValue )
 			{
@@ -241,5 +264,41 @@ void vfnTask_Scheduler(void)
 			}
 		}
 	}
+
+}
+
+void vfnSchedulerPoint(void)
+{
+   TaskIdType task_idprio;
+   TaskIdType task_id_max;
+   TaskIdType prio_max=6;
+   	
+	for (task_idprio = 0;task_idprio <= (uint8_t)TASK_MAXNUM; task_idprio++)
+	{
+		if(task_ctrl_array[task_idprio].taskState == TASK_STATE_READY)
+		{
+      if (prio_max > task_ctrl_array[task_idprio].taskPriority){ 
+        task_id_max=task_idprio;
+        prio_max = task_ctrl_array[task_idprio].taskPriority;
+      }
+      else{
+        task_ctrl_array[task_idprio].taskState = TASK_STATE_SUSPENDED;
+      }
+    }   
+	}
+  
+  //if(prio_max==6){	
+		//prio_max =6;			
+	//}
+	//else{
+	task_ctrl_array[(uint8_t)task_id_max].runTask=1;
+	//}
+ 
+}
+
+void Timer0_ISR_Callback(void)     //Esta callback se Activa por el TC0_Handler()
+{
+   
+  task_ctrl_array[(uint8_t)TASK_ISR].taskState = TASK_STATE_READY;   
 
 }

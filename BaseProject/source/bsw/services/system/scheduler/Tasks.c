@@ -13,68 +13,62 @@ uint8_t u8100ms_Ctr2=0;
 
 
 void vfnTsk_1ms(void)
-{
-  
+{ 
+  //LED_Toggle( 1 );
+
+  vfnSchedulerPoint();
 }
 
 void vfnTsk_2msA(void)
 {
-	
+  //LED_Toggle( 1 );
+
+	vfnSchedulerPoint();
 }
 
 void vfnTsk_2msB(void)
 {
-	
+  //LED_Toggle( 1 );
+
+  vfnSchedulerPoint();	
 }
 
 void vfnTsk_10ms(void)
-{
-	/*static uint8_t u8500ms_Ctr=0;
-	
-	u8500ms_Ctr++;
-	
-	if (25 <= u8500ms_Ctr)
-	{
-		u8500ms_Ctr = 0;
-		LED_Toggle( 1 );
-	} */
+{	
+  LED_Toggle( 1 );
+  Wait(9);
+  vfnSchedulerPoint();
 }
 
 void vfnTsk_50ms(void)
-{
-
+{  
+  LED_Toggle( 1 );
+  Wait(49);
+  vfnSchedulerPoint();
 }
 
 void vfnTsk_100ms(void)
-{
-
-	u8100ms_Ctr++;
-    u8100ms_Ctr2++;
-
-	if (5 <= u8100ms_Ctr)
-	{
-		u8100ms_Ctr = 0;
-		LED_Toggle( 0 );
-	}
-    if (10 <= u8100ms_Ctr2)
-	{
-		u8100ms_Ctr2 = 0;
-	}
-
-
-    //Sheduler point
+{ 
+  //LED_Toggle( 1 );
+  //Wait(99);
+  //vfnSchedulerPoint();   
 }
 
 
-/**
- *  \brief External Triggered Task.
- *
- *  Execution of this task will be deppendent on the previouly activation of it-
- *  in Timer0 ISR handler, vfnSchedulePoint() will check priority of current active-
- *  task and decide if run this task or not
- */
-void vfnTsk_ExtTriggered(void)
+void vfnTsk_ISR(void)
 {
-
+  //uint8_t x;
+	//LED_Clear(0);
+  //for(x=0;x<30;x++){ 
+  //LED_Toggle( 0 );
+  //Wait(2);
+  //}
+  LED_Clear(0);
+  Wait(58);
+  LED_Set(0);
+  Wait(1);
+  LED_Clear(0);
+  
+  
+  vfnSchedulerPoint();
 }
-

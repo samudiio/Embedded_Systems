@@ -231,3 +231,17 @@ void UART_CompareConfig(Uart *uart, uint8_t Val1, uint8_t Val2)
 {
 	uart->UART_CMPR = (UART_CMPR_VAL1(Val1) | UART_CMPR_VAL2(Val2));
 }
+
+
+void UART4_Handler(void)
+{
+	//Uart *uart = UART4;
+  uint8_t actual;  
+  //actual = callback_function();
+  //UART_PutChar(UART4, actual);
+  UART4->UART_THR = actual;
+  //printf("%c", (char)UART4->UART_RHR);
+  
+  //task_ctrl_array[(uint8_t)TASK_10MS].taskState = TASK_STATE_READY;
+			
+}

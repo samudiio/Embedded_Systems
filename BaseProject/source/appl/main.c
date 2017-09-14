@@ -4,33 +4,38 @@
 
 #include "board.h"
 #include "app_scheduler.h"
-#include "timer0.h"
 #include "Tasks.h"    
 #include <stdbool.h>
 #include <stdio.h>
 
-/*------------------------------------------------------------------------------
- *         Exported Variables
- *----------------------------------------------------------------------------*/
-uint8_t timer0_interrupt;
 /*----------------------------------------------------------------------------
  *        Local definitions
  *----------------------------------------------------------------------------*/
 
 TaskType Tasks[]={
-/*  TaskPriority    TaskId      TaskFunctionPointer   */
-  {      5,        TASK_1MS,       vfnTsk_1ms           },
-  {      4,        TASK_2MSA,      vfnTsk_2msA          },
-  {      4,        TASK_2MSB,      vfnTsk_2msB          },
-  {      3,        TASK_10MS,      vfnTsk_10ms          },
-  {      2,        TASK_50MS,      vfnTsk_50ms          },
-  {      1,        TASK_100MS,     vfnTsk_100ms         },
-  {      1,        TASK_100MS,     vfnTsk_ExtTriggered  }
+/*  TaskPriority    TaskId   TaskFunctionPointer taskState  */
+  {      5,        TASK_1MS,       vfnTsk_1ms,    TASK_STATE_SUSPENDED    },
+  {      5,        TASK_2MSA,      vfnTsk_2msA,   TASK_STATE_SUSPENDED   },
+  {      5,        TASK_2MSB,      vfnTsk_2msB,   TASK_STATE_SUSPENDED   },
+  {      3,        TASK_10MS,      vfnTsk_10ms,   TASK_STATE_SUSPENDED   },
+  {      2,        TASK_50MS,      vfnTsk_50ms,   TASK_STATE_SUSPENDED   },
+  {      5,        TASK_100MS,     vfnTsk_100ms,  TASK_STATE_SUSPENDED  },
+  {      1,        TASK_ISR,       vfnTsk_ISR,    TASK_STATE_SUSPENDED  }
 };
 
 /*----------------------------------------------------------------------------
  *        Local functions
  *----------------------------------------------------------------------------*/
+
+/**
+ *  Interrupt handler for TC0 interrupt.
+ */
+
+/**
+ *  Configure Timer Counter 0 to generate an interrupt every 1s.
+ */
+
+
 
 /**
  *  \brief Configure LEDs
@@ -64,30 +69,30 @@ extern int main( void )
 
 	/* Enable I and D cache */
 	SCB_EnableICache();
-    SCB_EnableDCache();
+  SCB_EnableDCache();
 
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
-
-	printf("Configure TC.\n\r");
-	_ConfigureTc();
+  //printf( "Configure UART4.\n\r" ) ;
+  //vfnSerialCtrl_Init();
+  printf("Configure TC.\n\r");
+	Timer0_Init();
   
   	/* Initialize Task Scheduler */
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start execution of task scheduler */
 	vfnScheduler_Start();
+  
+  printf("Configure TC.\n\r");
+  Wait(2);// Delay para desfasar TM0 y systick
+	Timer0_Init();
 
 	/*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
 	{
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
-		if(timer0_interrupt == 1)
-		{
-		    timer0_interrupt = 0;
-		    printf("Timer0 Interrupt.\n\r");
-		    LED_Toggle( 1 );
-		}
+    //vfnSchedulerPoint();
 	}
 
 }

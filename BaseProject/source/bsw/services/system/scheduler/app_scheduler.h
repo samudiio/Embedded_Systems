@@ -21,20 +21,15 @@
 /*-- Types Definitions -------------------------------------------------------*/
 typedef void (*FuncPtr)(void);
 typedef uint8_t TaskIdType;
+typedef uint8_t TaskStateType;
 
 typedef struct  
 {
   uint8_t taskPriority;
   TaskIdType taskId;
   FuncPtr tskFcnPtr;
+  TaskStateType taskState;
 }TaskType;
-
-typedef enum
-{
-    SUSPENDED,
-    READY,
-    RUNNING,
-}TaskStateType;
 
 /*-- Defines -----------------------------------------------------------------*/
 
@@ -47,8 +42,12 @@ typedef enum
 #define  TASK_10MS    0x03u
 #define  TASK_50MS    0x04u
 #define  TASK_100MS   0x05u
-#define  TASK_MAXNUM  0x06u
+#define  TASK_ISR     0x06u
+#define  TASK_MAXNUM  0x07u
 
+#define  TASK_STATE_SUSPENDED     0
+#define  TASK_STATE_READY         1
+#define  TASK_STATE_RUNNING       2
 
 #define TASK_SCHEDULER_INIT             0x00u   
 #define TASK_SCHEDULER_RUNNING          0x01u
@@ -75,6 +74,11 @@ void vfnScheduler_Stop(void);
 
 /** Multi-thread round robin task scheduler */
 void vfnTask_Scheduler(void);
+
+/** Decides which task will be executed */
+void vfnSchedulerPoint(void);
+
+void Timer0_ISR_Callback(void);
 
 /*******************************************************************************/
 
