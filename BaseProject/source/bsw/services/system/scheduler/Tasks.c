@@ -20,23 +20,7 @@ uint8_t ExtTsk_Activated = 0;
 
 void vfnTsk_1ms(void)
 {
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    /* code */
     vfnSchedulePoint();
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    //vfnSchedulePoint();
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    /* code */
 }
 
 void vfnTsk_2msA(void)
