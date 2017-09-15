@@ -19,13 +19,13 @@ uint8_t ExtTsk_Activated;
 
 TaskType Tasks[]={
 /*  TaskPriority    TaskId      TaskState     TaskFunctionPointer */
-  {      5,        TASK_1MS,    SUSPENDED,    vfnTsk_1ms           },
-  {      4,        TASK_2MSA,   SUSPENDED,    vfnTsk_2msA          },
-  {      4,        TASK_2MSB,   SUSPENDED,    vfnTsk_2msB          },
-  {      3,        TASK_10MS,   SUSPENDED,    vfnTsk_10ms          },
-  {      2,        TASK_50MS,   SUSPENDED,    vfnTsk_50ms          },
-  {      1,        TASK_100MS,  SUSPENDED,    vfnTsk_100ms         },
-  {      6,        TASK_EXTTG,  SUSPENDED,    vfnTsk_ExtTriggered  }
+/*0*/  {      5,        TASK_1MS,    SUSPENDED,    vfnTsk_1ms           },
+/*1*/  {      4,        TASK_2MSA,   SUSPENDED,    vfnTsk_2msA          },
+/*2*/  {      4,        TASK_2MSB,   SUSPENDED,    vfnTsk_2msB          },
+/*3*/  {      3,        TASK_10MS,   SUSPENDED,    vfnTsk_10ms          },
+/*4*/  {      2,        TASK_50MS,   SUSPENDED,    vfnTsk_50ms          },
+/*5*/  {      1,        TASK_100MS,  SUSPENDED,    vfnTsk_100ms         },
+/*6*/  {      6,        TASK_EXTTG,  SUSPENDED,    vfnTsk_ExtTriggered  }
 };
 
 /*----------------------------------------------------------------------------
@@ -66,11 +66,11 @@ extern int main( void )
 	{
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
-		if(ExtTsk_Activated)
+		/*if(ExtTsk_Activated)
 		{
 		    ExtTsk_Activated = 0;
 		    printf("External Task Execution .\n\r");
-		}
+		}*/
 	}
 
 }

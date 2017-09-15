@@ -83,7 +83,7 @@ void vfnScheduler_Callback(void)
 		{
 			gu8Scheduler_Thread_ID = TASK_100MS;
 			u8_100ms_Counter = 0;
-			//task_ctrl_array[(uint8_t)TASK_100MS].taskState = READY;
+			task_ctrl_array[(uint8_t)TASK_100MS].taskState = READY;
 			task_ctrl_array[(uint8_t)TASK_100MS].tickValue = gu8Scheduler_Counter;
 		}
 		/*-- Allow 1 ms periodic tasks to be executed --*/
@@ -120,7 +120,7 @@ void vfnScheduler_Callback(void)
 			{
 				gu8Scheduler_Thread_ID = TASK_2MSA;
 			}
-			 //task_ctrl_array[(uint8_t)TASK_2MSA].taskState = READY;
+			 task_ctrl_array[(uint8_t)TASK_2MSA].taskState = READY;
 			task_ctrl_array[(uint8_t)TASK_2MSA].tickValue = gu8Scheduler_Counter;
 		}
 		else
@@ -140,7 +140,7 @@ void vfnScheduler_Callback(void)
 				{
 					gu8Scheduler_Thread_ID = TASK_10MS;
 					u8_10ms_Counter = 0;
-					//task_ctrl_array[(uint8_t)TASK_10MS].taskState = READY;
+					task_ctrl_array[(uint8_t)TASK_10MS].taskState = READY;
 					task_ctrl_array[(uint8_t)TASK_10MS].tickValue = gu8Scheduler_Counter;
 				}
 				/*-- Allow 2 ms group B periodic tasks to be executed --*/
@@ -148,7 +148,7 @@ void vfnScheduler_Callback(void)
 				{
 					gu8Scheduler_Thread_ID = TASK_2MSB;
 				}
-				//task_ctrl_array[(uint8_t)TASK_2MSB].taskState = READY;
+				task_ctrl_array[(uint8_t)TASK_2MSB].taskState = READY;
 				task_ctrl_array[(uint8_t)TASK_2MSB].tickValue = gu8Scheduler_Counter;
 			}
 		}
@@ -273,7 +273,7 @@ void vfnTask_Scheduler(void)
         if( (READY == task_ctrl_array[task_idx].taskState) )
         {
             ready_tasksid[indx] = (uint8_t)task_idx;
-            printf("tasks = %d, is ready\n\r", task_idx);
+            printf("\ntasks = %d, is ready\n\r", task_idx);
             indx++;
 
         }
@@ -293,67 +293,44 @@ void vfnTask_Scheduler(void)
                 location = task_idx;
             }
         }
-        printf("Mayor priodidad es = %d\n\r\n", ready_tasksprio);
-        printf("Tarea con mayor prioridad = %d\n\r", task_ctrl_array[ready_tasksid[location]].taskId);
-    }
+        printf("\nMayor priodidad es = %d\n\r", ready_tasksprio);
+        printf("Tarea con mayor prioridad = %d\n\r\n", task_ctrl_array[ready_tasksid[location]].taskId);
 
-#if NOCOMP
         /*only one task is ready hence it has highest priority*/
         if(indx == 1)
         {
-            task_ctrl_array[ready_tasksid[0]].taskState = RUNNING;
-            task_ctrl_array[ready_tasksid[0]].tskFcnPtr();
-            task_ctrl_array[ready_tasksid[0]].taskState = SUSPENDED;
-
-            if ( gu8Scheduler_Counter != task_ctrl_array[ready_tasksid[0]].tickValue )
-            {
-                task_ctrl_array[ready_tasksid[0]].taskOverload = 1;
-                gu8Scheduler_Status = TASK_SCHEDULER_OVERLOAD;
-            }
-            else{
-                gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;
-            }
+            /*do not check priority just run task*/
+            task_ctrl_array[ready_tasksid[location]].runTask = 1;
         }
         else
         {
             /*check if ready task has mayor priority that active task*/
             if(ready_tasksprio > active_task_priority)
             {
+                /*only if ready task has mayor priority run it*/
+                task_ctrl_array[ready_tasksid[location]].runTask = 1;
+            }
+        }
+
+        if( 1 == task_ctrl_array[ready_tasksid[location]].runTask )
+        {
+            task_ctrl_array[ready_tasksid[location]].runTask = 0;
+
+            if ( NULL != task_ctrl_array[ready_tasksid[location]].tskFcnPtr )
+            {
                 task_ctrl_array[ready_tasksid[location]].taskState = RUNNING;
                 task_ctrl_array[ready_tasksid[location]].tskFcnPtr();
                 task_ctrl_array[ready_tasksid[location]].taskState = SUSPENDED;
+            }
 
-                if ( gu8Scheduler_Counter != task_ctrl_array[ready_tasksid[location]].tickValue )
-                {
-                    task_ctrl_array[ready_tasksid[location]].taskOverload = 1;
-                    gu8Scheduler_Status = TASK_SCHEDULER_OVERLOAD;
-                }
-                else{
-                    gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;
-                }
+            if ( gu8Scheduler_Counter != task_ctrl_array[ready_tasksid[location]].tickValue )
+            {
+                task_ctrl_array[ready_tasksid[location]].taskOverload = 1;
+                gu8Scheduler_Status = TASK_SCHEDULER_OVERLOAD;
+            }
+            else{
+                gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;
             }
         }
     }
-#endif
-
-    /*if( 1 == task_ctrl_array[task_idx].runTask )
-    {
-        task_ctrl_array[task_idx].runTask = 0;
-
-        if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
-        {
-            task_ctrl_array[task_idx].taskState = RUNNING;
-            task_ctrl_array[task_idx].tskFcnPtr();
-            task_ctrl_array[task_idx].taskState = SUSPENDED;
-        }
-
-        if ( gu8Scheduler_Counter != task_ctrl_array[task_idx].tickValue )
-        {
-            task_ctrl_array[task_idx].taskOverload = 1;
-            gu8Scheduler_Status = TASK_SCHEDULER_OVERLOAD;
-        }
-        else{
-            gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;
-        }
-    }*/
 }
