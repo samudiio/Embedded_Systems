@@ -14,13 +14,13 @@
 
 TaskType Tasks[]={
 /*  TaskPriority    TaskId   TaskFunctionPointer taskState  */
-  {      5,        TASK_1MS,       vfnTsk_1ms,    TASK_STATE_SUSPENDED    },
-  {      5,        TASK_2MSA,      vfnTsk_2msA,   TASK_STATE_SUSPENDED   },
-  {      5,        TASK_2MSB,      vfnTsk_2msB,   TASK_STATE_SUSPENDED   },
-  {      3,        TASK_10MS,      vfnTsk_10ms,   TASK_STATE_SUSPENDED   },
-  {      2,        TASK_50MS,      vfnTsk_50ms,   TASK_STATE_SUSPENDED   },
-  {      5,        TASK_100MS,     vfnTsk_100ms,  TASK_STATE_SUSPENDED  },
-  {      1,        TASK_ISR,       vfnTsk_ISR,    TASK_STATE_SUSPENDED  }
+  {      1,        TASK_1MS,       vfnTsk_1ms,    TASK_STATE_SUSPENDED    },
+  {      1,        TASK_2MSA,      vfnTsk_2msA,   TASK_STATE_SUSPENDED   },
+  {      1,        TASK_2MSB,      vfnTsk_2msB,   TASK_STATE_SUSPENDED   },
+  {      4,        TASK_10MS,      vfnTsk_10ms,   TASK_STATE_SUSPENDED   },
+  {      5,        TASK_50MS,      vfnTsk_50ms,   TASK_STATE_SUSPENDED   },
+  {      1,        TASK_100MS,     vfnTsk_100ms,  TASK_STATE_SUSPENDED  },
+  {      3,        TASK_ISR,       vfnTsk_ISR,    TASK_STATE_SUSPENDED  }
 };
 
 /*----------------------------------------------------------------------------
@@ -84,7 +84,7 @@ extern int main( void )
 	vfnScheduler_Start();
   
   printf("Configure TC.\n\r");
-  Wait(2);// Delay para desfasar TM0 y systick
+  //Wait(1);// Delay para desfasar TM0 y systick
 	Timer0_Init();
 
 	/*-- Loop through all the periodic tasks from Task Scheduler --*/
@@ -92,7 +92,7 @@ extern int main( void )
 	{
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
-    //vfnSchedulerPoint();
+
 	}
 
 }

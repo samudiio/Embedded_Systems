@@ -22,7 +22,6 @@
 
 typedef struct  
 {
-  uint8_t runTask;
   uint8_t taskOverload;
   uint8_t tickValue;
   TaskIdType taskId;
@@ -61,20 +60,13 @@ TaskCtrlType task_ctrl_array[TASK_MAXNUM];
 * \todo
 */
 
-//Aqui de debe cambiar 
-//task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
-//POR ==> 
-//task_ctrl_array[task_idx].taskState = TASK_STATE_READY;
-//Posteriormente ir a vfnSchedulerPoint() para que decida quien tiene mas prioridad entre los READY
-//Y ponga 
-//task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
 
 void vfnScheduler_Callback(void)            
 {
 	
 	/*-- Update scheduler control variable --*/
-	gu8Scheduler_Counter++;
-	
+    
+	gu8Scheduler_Counter++;	
 	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	/*  1ms execution thread - used to derive two execution threads:                */
 	/*  a) 1ms thread (highest priority tasks)                                      */
@@ -89,8 +81,7 @@ void vfnScheduler_Callback(void)
 		if (u8_100ms_Counter >= 100)
 		{
 			gu8Scheduler_Thread_ID = TASK_100MS;
-			u8_100ms_Counter = 0;
-			//task_ctrl_array[(uint8_t)TASK_100MS].runTask=1;
+			u8_100ms_Counter = 0;			
       task_ctrl_array[(uint8_t)TASK_100MS].taskState = TASK_STATE_READY;
 			task_ctrl_array[(uint8_t)TASK_100MS].tickValue = gu8Scheduler_Counter;
 		}
@@ -98,8 +89,7 @@ void vfnScheduler_Callback(void)
 		else
 		{
 			gu8Scheduler_Thread_ID = TASK_1MS;
-		}
-		//task_ctrl_array[(uint8_t)TASK_1MS].runTask=1;
+		}		
     task_ctrl_array[(uint8_t)TASK_1MS].taskState = TASK_STATE_READY;
 		task_ctrl_array[(uint8_t)TASK_1MS].tickValue = gu8Scheduler_Counter;
 	}
@@ -119,8 +109,7 @@ void vfnScheduler_Callback(void)
 			if (u8_50ms_Counter >= 25)
 			{
 				gu8Scheduler_Thread_ID = TASK_50MS;
-				u8_50ms_Counter = 0;
-				//task_ctrl_array[(uint8_t)TASK_50MS].runTask=1;
+				u8_50ms_Counter = 0;				
         task_ctrl_array[(uint8_t)TASK_50MS].taskState = TASK_STATE_READY;
 				task_ctrl_array[(uint8_t)TASK_50MS].tickValue = gu8Scheduler_Counter;
 			}
@@ -128,8 +117,7 @@ void vfnScheduler_Callback(void)
 			else
 			{
 				gu8Scheduler_Thread_ID = TASK_2MSA;
-			}
-			//task_ctrl_array[(uint8_t)TASK_2MSA].runTask=1;
+			}			
       task_ctrl_array[(uint8_t)TASK_2MSA].taskState = TASK_STATE_READY;
 			task_ctrl_array[(uint8_t)TASK_2MSA].tickValue = gu8Scheduler_Counter;
 		}
@@ -149,8 +137,7 @@ void vfnScheduler_Callback(void)
 				if (u8_10ms_Counter >= 5)
 				{
 					gu8Scheduler_Thread_ID = TASK_10MS;
-					u8_10ms_Counter = 0;
-					//task_ctrl_array[(uint8_t)TASK_10MS].runTask=1;
+					u8_10ms_Counter = 0;					
           task_ctrl_array[(uint8_t)TASK_10MS].taskState = TASK_STATE_READY;
 					task_ctrl_array[(uint8_t)TASK_10MS].tickValue = gu8Scheduler_Counter;
 				}
@@ -158,15 +145,14 @@ void vfnScheduler_Callback(void)
 				else
 				{
 					gu8Scheduler_Thread_ID = TASK_2MSB;
-				}
-				//task_ctrl_array[(uint8_t)TASK_2MSB].runTask=1;
+				}				
         task_ctrl_array[(uint8_t)TASK_2MSB].taskState = TASK_STATE_READY;
 				task_ctrl_array[(uint8_t)TASK_2MSB].tickValue = gu8Scheduler_Counter;
 			}
 		}
 	}
   
-  
+  vfnSchedulerPoint();
 }
 
 /*******************************************************************************/
@@ -188,11 +174,12 @@ void vfnScheduler_Init(TaskType *TaskArray)
   gu8Scheduler_Status = TASK_SCHEDULER_INIT;
 	for (task_idx = 0; task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
 	{
-		task_ctrl_array[task_idx].tskFcnPtr = TaskArray[task_idx].tskFcnPtr;
-		task_ctrl_array[task_idx].taskId = TaskArray[task_idx].taskId;
+		task_ctrl_array[task_idx].tskFcnPtr    = TaskArray[task_idx].tskFcnPtr;
+		task_ctrl_array[task_idx].taskId       = TaskArray[task_idx].taskId;
     task_ctrl_array[task_idx].taskPriority = TaskArray[task_idx].taskPriority;
-    task_ctrl_array[task_idx].taskState = TaskArray[task_idx].taskState;   //Todas se inician como suspendidas
-	}
+    task_ctrl_array[task_idx].taskState    = TaskArray[task_idx].taskState;   //Todas se inician como suspendidas
+	  //printf("Task = %d , priority = %d , state = %d \n\r", task_idx, TaskArray[task_idx].taskPriority, TaskArray[task_idx].taskState  );
+  }
 }
 
 /*******************************************************************************/
@@ -239,29 +226,19 @@ void vfnScheduler_Stop(void)
 */
 void vfnTask_Scheduler(void)
 {
-	
-  vfnSchedulerPoint();
+	  
   TaskIdType task_idx;
 	
 	for (task_idx = 0;task_idx < (uint8_t)TASK_MAXNUM; task_idx++)
 	{
-		if( 1 == task_ctrl_array[task_idx].runTask )
-		{
-			task_ctrl_array[task_idx].runTask = 0;
+		if( task_ctrl_array[(uint8_t)task_idx].taskState == TASK_STATE_RUNNING )
+		{			
 			if ( NULL != task_ctrl_array[task_idx].tskFcnPtr )
-			{
-				task_ctrl_array[(uint8_t)task_idx].taskState = TASK_STATE_RUNNING;
-        task_ctrl_array[task_idx].tskFcnPtr();
+			{				
+        task_ctrl_array[(uint8_t)task_idx].tskFcnPtr();
         task_ctrl_array[(uint8_t)task_idx].taskState = TASK_STATE_SUSPENDED;
-			}
-			if ( gu8Scheduler_Counter != task_ctrl_array[task_idx].tickValue )
-			{
-				task_ctrl_array[task_idx].taskOverload = 1;
-				gu8Scheduler_Status = TASK_SCHEDULER_OVERLOAD;
-			}
-			else{
-				gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;
-			}
+			}			
+				gu8Scheduler_Status = TASK_SCHEDULER_RUNNING;			
 		}
 	}
 
@@ -270,29 +247,29 @@ void vfnTask_Scheduler(void)
 void vfnSchedulerPoint(void)
 {
    TaskIdType task_idprio;
-   TaskIdType task_id_max;
-   TaskIdType prio_max=6;
+   TaskIdType task_id_max=0;
+   TaskIdType prio_max=0;
    	
 	for (task_idprio = 0;task_idprio <= (uint8_t)TASK_MAXNUM; task_idprio++)
 	{
-		if(task_ctrl_array[task_idprio].taskState == TASK_STATE_READY)
+		if(task_ctrl_array[(uint8_t)task_idprio].taskState == TASK_STATE_READY)
 		{
-      if (prio_max > task_ctrl_array[task_idprio].taskPriority){ 
+      if (task_ctrl_array[(uint8_t)task_idprio].taskPriority > prio_max){//Save max priority task 
         task_id_max=task_idprio;
-        prio_max = task_ctrl_array[task_idprio].taskPriority;
+        prio_max = task_ctrl_array[(uint8_t)task_idprio].taskPriority;
       }
       else{
-        task_ctrl_array[task_idprio].taskState = TASK_STATE_SUSPENDED;
+        task_ctrl_array[(uint8_t)task_idprio].taskState = TASK_STATE_SUSPENDED;
       }
     }   
 	}
   
-  //if(prio_max==6){	
-		//prio_max =6;			
-	//}
-	//else{
-	task_ctrl_array[(uint8_t)task_id_max].runTask=1;
-	//}
+  if(prio_max==0){//ninguna tarea esta activa	
+  	prio_max =0;    
+  }
+  else{	  
+    task_ctrl_array[(uint8_t)task_id_max].taskState = TASK_STATE_RUNNING;
+  }
  
 }
 

@@ -27,30 +27,30 @@
 /* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                           */
 /* ---------------------------------------------------------------------------- */
 
-INPUT (C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\dbg_console.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\board_lowlevel.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\board_memories.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\exceptions.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\pio.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\mpu.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\pmc.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\uart.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\wdt.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\pio_it.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\supc.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\tc.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\xdma_hardware_interface.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\xdmac.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\xdmad.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\syscalls.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\system_sam.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\timetick.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\app_scheduler.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\Tasks.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\timer0.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\led.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\main.o 
-C:\Users\uidq7909\Desktop\Especialidad_SE\Sistemas_Embebidos\Practica_1\Practica_1\BaseProject\workspace\Debug\startup_sam.o)
+INPUT (C:\WinOpen\Git\BaseProject\workspace\Debug\dbg_console.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\board_lowlevel.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\board_memories.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\exceptions.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\pio.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\mpu.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\pmc.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\uart.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\wdt.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\pio_it.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\supc.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\tc.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\xdma_hardware_interface.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\xdmac.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\xdmad.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\syscalls.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\system_sam.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\timetick.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\app_scheduler.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\Tasks.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\timer0.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\led.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\main.o 
+C:\WinOpen\Git\BaseProject\workspace\Debug\startup_sam.o)
 
 /*------------------------------------------------------------------------------
  *      Linker script for running in internal FLASH on the ATSAMV71Q21
