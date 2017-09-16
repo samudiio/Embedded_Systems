@@ -51,7 +51,7 @@
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>334</L>
        <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
-       <VL>322</VL>
+       <VL>343</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -75,9 +75,10 @@
       </PI.11>
       <PI.12>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>66</L>
+       <C>1</C>
+       <L>65</L>
        <P>..\source\bsw\services\system\scheduler\Tasks.c</P>
-       <VL>40</VL>
+       <VL>49</VL>
       </PI.12>
       <PI.13>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -88,9 +89,9 @@
       </PI.13>
       <PI.14>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>233</L>
+       <L>231</L>
        <P>..\source\bsw\services\system\scheduler\app_scheduler.c</P>
-       <VL>233</VL>
+       <VL>231</VL>
       </PI.14>
       <PI.15>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -837,7 +838,7 @@
        <RelativeFileName>..\source\bsw\ecual\led.c</RelativeFileName>
       </Editor.1>
       <Editor.10>
-       <FileBarIndex>13</FileBarIndex>
+       <FileBarIndex>12</FileBarIndex>
        <RectPosBottom>673</RectPosBottom>
        <RectPosLeft>210</RectPosLeft>
        <RectPosRight>1166</RectPosRight>
@@ -869,7 +870,7 @@
        <RelativeFileName>..\source\bsw\services\system\timetick\timetick.c</RelativeFileName>
       </Editor.13>
       <Editor.14>
-       <FileBarIndex>9</FileBarIndex>
+       <FileBarIndex>10</FileBarIndex>
        <RectPosBottom>553</RectPosBottom>
        <RectPosLeft>90</RectPosLeft>
        <RectPosRight>1046</RectPosRight>
@@ -893,7 +894,7 @@
        <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\board_lowlevel.c</RelativeFileName>
       </Editor.16>
       <Editor.17>
-       <FileBarIndex>12</FileBarIndex>
+       <FileBarIndex>13</FileBarIndex>
        <RectPosBottom>583</RectPosBottom>
        <RectPosLeft>120</RectPosLeft>
        <RectPosRight>1076</RectPosRight>
@@ -981,7 +982,7 @@
        <RelativeFileName>..\source\bsw\services\system\scheduler\app_scheduler.c</RelativeFileName>
       </Editor.7>
       <Editor.8>
-       <FileBarIndex>10</FileBarIndex>
+       <FileBarIndex>9</FileBarIndex>
        <RectPosBottom>561</RectPosBottom>
        <RectPosLeft>60</RectPosLeft>
        <RectPosRight>1021</RectPosRight>

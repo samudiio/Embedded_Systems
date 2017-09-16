@@ -36,21 +36,21 @@ void vfnTsk_2msB(void)
 void vfnTsk_10ms(void)
 {	
   LED_Toggle( 1 );
-  //Wait(9);
+  Wait(9);
   vfnSchedulerPoint();
 }
 
 void vfnTsk_50ms(void)
 {  
   LED_Toggle( 1 );
-  //Wait(49);
+  Wait(49);
   vfnSchedulerPoint();
 }
 
 void vfnTsk_100ms(void)
 { 
-  LED_Toggle( 1 );
-  //Wait(99);
+  // LED_Toggle( 1 );
+  // Wait(99);
   vfnSchedulerPoint();   
 }
 

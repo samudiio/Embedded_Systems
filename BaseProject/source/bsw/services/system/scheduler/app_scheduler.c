@@ -250,7 +250,7 @@ void vfnSchedulerPoint(void)
    TaskIdType task_id_max=0;
    TaskIdType prio_max=0;
    	
-	for (task_idprio = 0;task_idprio <= (uint8_t)TASK_MAXNUM; task_idprio++)
+	for (task_idprio = 0;task_idprio < (uint8_t)TASK_MAXNUM; task_idprio++)
 	{
 		if(task_ctrl_array[(uint8_t)task_idprio].taskState == TASK_STATE_READY)
 		{
