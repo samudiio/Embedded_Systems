@@ -1,9 +1,12 @@
-LOADING	D:\Git\Embedeed_Systems\BaseProject\workspace\Debug\BaseProject.elf
+INITIALIZING	Emulator: EDBG CMSIS-DAP   Debugger: On-chip
+CONVERTING	C:\Users\EspiN\Embedded_SystemsGit\repository\BaseProject\workspace\Debug\BaseProject.elf
+LOADING	C:\Users\EspiN\Embedded_SystemsGit\repository\BaseProject\workspace\Debug\BaseProject.elf
 ANALYZING
 ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-PROGRAMMING 	42292 bytes
+CPU	CPUID=0x410FC271 (M7 variant 0, revision 1)
+LOADING 	43132 bytes
 UMI INFO	Loading UMI monitor...
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (3 sectors)
 UMI INFO	Unloading UMI monitor...

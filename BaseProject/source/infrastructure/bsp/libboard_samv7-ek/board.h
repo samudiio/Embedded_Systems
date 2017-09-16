@@ -261,9 +261,10 @@
 #define LED_YELLOW1  1
 
 /** LED #0 pin definition (YELLOW). */
-#define PIN_LED_0  {PIO_PA23, PIOA, ID_PIOA, PIO_OUTPUT_1, PIO_DEFAULT}
+#define PIN_LED_0  {PIO_PA9, PIOA, ID_PIOA, PIO_OUTPUT_1, PIO_DEFAULT}
 /** LED #0 pin definition (YELLOW). */
-#define PIN_LED_1  {PIO_PC9, PIOC, ID_PIOC, PIO_OUTPUT_1, PIO_DEFAULT}
+// #define PIN_LED_1  {PIO_PC9, PIOC, ID_PIOC, PIO_OUTPUT_1, PIO_DEFAULT}
+#define PIN_LED_1  {PIO_PA23, PIOA, ID_PIOA, PIO_OUTPUT_1, PIO_DEFAULT}
 
 /** List of all LEDs definitions. */
 #define PINS_LEDS  {PIN_LED_0, PIN_LED_1}
