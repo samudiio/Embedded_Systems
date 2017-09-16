@@ -264,12 +264,9 @@ void vfnSchedulerPoint(void)
     }   
 	}
   
-  if(prio_max==0){//ninguna tarea esta activa	
-  	prio_max =0;    
-  }
-  else{	  
+  if(prio_max!=0){	  
     task_ctrl_array[(uint8_t)task_id_max].taskState = TASK_STATE_RUNNING;
-  }
+	}
  
 }
 
