@@ -71,18 +71,18 @@ void vfnTsk_50ms(void)
 
 void vfnTsk_100ms(void)
 {
-    u8100ms_Ctr++;
-    u8100ms_Ctr2++;
+    // u8100ms_Ctr++;
+    // u8100ms_Ctr2++;
 
-    if (5 <= u8100ms_Ctr)
-    {
-        u8100ms_Ctr = 0;
-        LED_Toggle( 1 );
-    }
-    if (10 <= u8100ms_Ctr2)
-    {
-        u8100ms_Ctr2 = 0;
-    }
+    // if (5 <= u8100ms_Ctr)
+    // {
+    //     u8100ms_Ctr = 0;
+    //     LED_Toggle( 1 );
+    // }
+    // if (10 <= u8100ms_Ctr2)
+    // {
+    //     u8100ms_Ctr2 = 0;
+    // }
 
     vfnSchedulePoint();
 
@@ -99,6 +99,6 @@ void vfnTsk_100ms(void)
 void vfnTsk_ExtTriggered(void)
 {
     ExtTsk_Activated = 1;
-    //LED_Toggle( 1 );
+    LED_Toggle( 1 );
 }
 

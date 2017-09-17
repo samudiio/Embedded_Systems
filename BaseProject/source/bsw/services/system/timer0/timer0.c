@@ -31,7 +31,7 @@ void TC0_Handler(void)
     /* Clear status bit to acknowledge interrupt */
     dummy = TC0->TC_CHANNEL[ 0 ].TC_SR;
     vfnActivateTask((TaskIdType)TASK_EXTTG);
-    NVIC_DisableIRQ(TC0_IRQn);
+    // NVIC_DisableIRQ(TC0_IRQn);
 
 }
 

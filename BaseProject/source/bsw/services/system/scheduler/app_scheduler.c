@@ -258,7 +258,7 @@ void vfnSchedulePoint(void)
      */
     if(task_ctrl_array[(uint8_t)TASK_EXTTG].taskState ==  READY)
     {
-        if(task_ctrl_array[task_idx].taskPriority > active_task_priority)
+        if(task_ctrl_array[TASK_EXTTG].taskPriority > active_task_priority)
         {
             task_ctrl_array[active_task].taskState = READY;
             task_ctrl_array[(uint8_t)TASK_EXTTG].runTask=1;
