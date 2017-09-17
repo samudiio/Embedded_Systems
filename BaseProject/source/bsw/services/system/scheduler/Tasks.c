@@ -8,6 +8,7 @@
 #include "app_scheduler.h"
 #include "led.h"
 #include "Tasks.h"
+#include <stdio.h>
 
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
@@ -20,38 +21,25 @@ uint8_t ExtTsk_Activated = 0;
 
 void vfnTsk_1ms(void)
 {
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    /* code */
+    printf("1ms Task\n\r");
     vfnSchedulePoint();
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    //vfnSchedulePoint();
-    /* code */
-    /* code */
-    /* code */
-    /* code */
-    /* code */
 }
 
 void vfnTsk_2msA(void)
 {
+    printf("2msA Task\n\r");
     vfnSchedulePoint();
 }
 
 void vfnTsk_2msB(void)
 {
-    vfnSchedulePoint();
+    printf("2msB Task\n\r");
+     vfnSchedulePoint();
 }
 
 void vfnTsk_10ms(void)
 {
-	
+    printf("10ms Task diez\n\r");
     vfnSchedulePoint();
 }
 
@@ -59,6 +47,7 @@ void vfnTsk_50ms(void)
 {
     static uint8_t u8500ms_Ctr=0;
 
+    printf("50ms Task cincuenta\n\r");
     u8500ms_Ctr++;
 
     if (25 <= u8500ms_Ctr)
@@ -66,6 +55,7 @@ void vfnTsk_50ms(void)
         u8500ms_Ctr = 0;
         LED_Toggle( 0 );
     }
+
     vfnSchedulePoint();
 }
 
@@ -73,6 +63,8 @@ void vfnTsk_100ms(void)
 {
     u8100ms_Ctr++;
     u8100ms_Ctr2++;
+
+    printf("100ms Task CIEN!!!\n\r");
 
     if (5 <= u8100ms_Ctr)
     {
@@ -98,7 +90,8 @@ void vfnTsk_100ms(void)
  */
 void vfnTsk_ExtTriggered(void)
 {
-    ExtTsk_Activated = 1;
+    printf("External Task Execution!\n\r");
     //LED_Toggle( 1 );
+    vfnSchedulePoint();
 }
 

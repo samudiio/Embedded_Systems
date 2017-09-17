@@ -31,7 +31,7 @@ void TC0_Handler(void)
     /* Clear status bit to acknowledge interrupt */
     dummy = TC0->TC_CHANNEL[ 0 ].TC_SR;
     vfnActivateTask((TaskIdType)TASK_EXTTG);
-    NVIC_DisableIRQ(TC0_IRQn);
+    //NVIC_DisableIRQ(TC0_IRQn);
 
 }
 
@@ -49,7 +49,8 @@ void _ConfigureTc(void)
     PMC_EnablePeripheral(ID_TC0);
 
     /** Configure TC for a 1Hz frequency and trigger on RC compare. */
-    TC_FindMckDivisor(1, BOARD_MCK/2, &div, &tcclks, BOARD_MCK);
+    //TC_FindMckDivisor(1, BOARD_MCK/2, &div, &tcclks, BOARD_MCK);
+    TC_FindMckDivisor(500, BOARD_MCK/2, &div, &tcclks, BOARD_MCK);
 
     TC_Configure(TC0, 0, tcclks | TC_CMR_CPCTRG);
     TC0->TC_CHANNEL[0].TC_RC = (BOARD_MCK / div);
